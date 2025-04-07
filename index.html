@@ -16,18 +16,89 @@
       margin-bottom: 1em;
       letter-spacing: 1px;
     }
+    .graph {
+      margin-bottom: 20px;
+    }
+    img {
+      max-width: 300px;
+      height: auto;
+      display: block;
+    }
+    select {
+      margin-bottom: 20px;
+      padding: 5px;
+      font-size: 16px;
+    }
   </style>
 </head>
+  
+<link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+  
 <body>
   <h1>Desmos Demos</h1>
+  
+  <label for="sort-select">Sort by: </label>
+  <select id="sort-select">
+    <option value="title">Title (A–Z)</option>
+    <option value="date">Date Created (Newest)</option>
+    <option value="bytes">Number of Bytes</option>
+  </select>
 
-  <h2>Mandelbrot Set 2.0</h2>
-  <img src="Desmos Mandelbrot Set 2.0.png" alt "Mandelbrot Set 2.0" width="400">
-  <p><a href="https://www.desmos.com/calculator/vpibnxiqsz" target="_blank">View Graph</a></p>
+  <div id="graph-list"></div>
 
-  <h2>Thomae Function</h2>
-  <img src="Desmos Thomae Function.png" alt "Thomae Function" width="400">
-  <p><a href="https://www.desmos.com/calculator/qaoepurcpx" target="_blank">View Graph</a></p>
+  <script>
+    const graphs = [
+      {
+        title: "Mandelbrot Set 2.0",
+        image: "Images/Mandelbrot Set 2.0.png",
+        link: "https://www.desmos.com/calculator/vpibnxiqsz",
+        date: "2024-07-12",
+        bytes: 20
+      },
+      {
+        title: "Thomae Function",
+        image: "Images/Thomae Function.png",
+        link: "https://www.desmos.com/calculator/vpibnxiqsz",
+        date: "2025-03-09",
+        bytes: 10
+      }
+    ];
+
+    const listDiv = document.getElementById("graph-list");
+    const sortSelect = document.getElementById("sort-select");
+
+    function renderGraphs(data) {
+      listDiv.innerHTML = ""; // Clear old list
+      data.forEach(graph => {
+        const div = document.createElement("div");
+        div.className = "graph";
+        div.innerHTML = `
+          <img src="${graph.image}" alt="${graph.title}">
+          <p><strong><a href="${graph.link}" target="_blank">${graph.title}</a></strong></p>
+          <p>Date Created: ${graph.date}</p>
+          <p>Number of Equations: ${graph.equations}</p>
+          <hr>
+        `;
+        listDiv.appendChild(div);
+      });
+    }
+
+    function sortAndRender() {
+      const sortBy = sortSelect.value;
+      const sorted = [...graphs];
+      if (sortBy === "title") {
+        sorted.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sortBy === "date") {
+        sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+      } else if (sortBy === "bytes") {
+        sorted.sort((a, b) => b.bytes - a.bytes);
+      }
+      renderGraphs(sorted);
+    }
+
+    sortSelect.addEventListener("change", sortAndRender);
+    sortAndRender();
+  </script>
 
 </body>
 </html>
