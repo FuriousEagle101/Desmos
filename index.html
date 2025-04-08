@@ -42,6 +42,10 @@
     <option value="title">Title (A–Z)</option>
     <option value="date">Date Created (Newest)</option>
     <option value="bytes">Number of Bytes</option>
+    <option value="oneliner">One-Liners</option>
+    <option value="interactive">Interactive</option>
+    <option value="moving">Moving</option>
+    <option value="awesomeness">Awesomeness</option>
   </select>
 
   <div id="graph-list"></div>
@@ -50,20 +54,37 @@
     const graphs = [
       {
         title: "Mandelbrot Set 2.0",
-        image: "Images/Mandelbrot Set 2.0.png",
         link: "https://www.desmos.com/calculator/vpibnxiqsz",
         date: "2024-07-12",
-        bytes: 20
+        bytes: 0,
+        oneliner: 0,
+        interactive: 0,
+        moving: 0
       },
       {
         title: "Thomae Function",
-        image: "Images/Thomae Function.png",
-        link: "https://www.desmos.com/calculator/vpibnxiqsz",
+        link: "https://www.desmos.com/calculator/qaoepurcpx",
         date: "2025-03-09",
-        bytes: 10
+        bytes: 0,
+        oneliner: 0,
+        interactive: 0,
+        moving: 0
+      }
+      {
+        title: "MATH",
+        link: "https://www.desmos.com/calculator/5sjeakxzl7",
+        date: "2025-03-29",
+        bytes: 0,
+        oneliner: 1,
+        interactive: 0,
+        moving: 0
       }
     ];
 
+    graphs.forEach((graph, index) => {
+      graph.originalIndex = index;
+    });
+        
     const listDiv = document.getElementById("graph-list");
     const sortSelect = document.getElementById("sort-select");
 
@@ -73,10 +94,13 @@
         const div = document.createElement("div");
         div.className = "graph";
         div.innerHTML = `
-          <img src="${graph.image}" alt="${graph.title}">
+          <img src="Images/${graph.title}.png" alt="${graph.title}">
           <p><strong><a href="${graph.link}" target="_blank">${graph.title}</a></strong></p>
           <p>Date Created: ${graph.date}</p>
-          <p>Number of Equations: ${graph.equations}</p>
+          <p>Number of Bytes: ${graph.bytes}</p>
+          <p>One-liner: ${graph.oneliner ? "Yes" : "No"}</p>
+          <p>Interactive: ${graph.interactive ? "Yes" : "No"}</p>
+          <p>Moving: ${graph.moving ? "Yes" : "No"}</p>
           <hr>
         `;
         listDiv.appendChild(div);
@@ -92,6 +116,29 @@
         sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
       } else if (sortBy === "bytes") {
         sorted.sort((a, b) => b.bytes - a.bytes);
+      } else if (sortBy === "oneliner") {
+        sorted.sort((a, b) => {
+          if (b.oneliner === a.oneliner) {
+            return a.originalIndex - b.originalIndex;
+          }
+          return b.oneliner - a.oneliner;
+        });
+      } else if (sortBy === "interactive") {
+        sorted.sort((a, b) => {
+          if (b.interactive === a.interactive) {
+            return a.originalIndex - b.originalIndex;
+          }
+          return b.interactive - a.interactive;
+        });
+      } else if (sortBy === "moving") {
+        sorted.sort((a, b) => {
+          if (b.moving === a.moving) {
+            return a.originalIndex - b.originalIndex;
+          }
+          return b.moving - a.moving;
+        });
+      } else if (sortBy === "awesomeness") {
+        sorted.sort((a, b) => b.originalIndex - a.originalIndex);
       }
       renderGraphs(sorted);
     }
