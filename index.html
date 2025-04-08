@@ -55,7 +55,7 @@
         image: "Images/Mandelbrot Set 2.0.png",
         link: "https://www.desmos.com/calculator/vpibnxiqsz",
         date: "2024-07-12",
-        bytes: 0
+        bytes: 0,
         oneliner: 0
       },
       {
@@ -63,7 +63,7 @@
         image: "Images/Thomae Function.png",
         link: "https://www.desmos.com/calculator/qaoepurcpx",
         date: "2025-03-09",
-        bytes: 0
+        bytes: 0,
         oneliner: 0
       }
       {
@@ -71,7 +71,7 @@
         image: "Images/MATH.png",
         link: "https://www.desmos.com/calculator/5sjeakxzl7",
         date: "2025-03-29",
-        bytes: 0
+        bytes: 0,
         oneliner: 1
       }
     ];
@@ -117,7 +117,7 @@
           return b.oneliner - a.oneliner;
         });
       } else if (sortBy === "awesomeness") {
-        sorted = [...originalGraphs];
+        sorted.sort((a, b) => b.originalIndex - a.originalIndex);
       }
       renderGraphs(sorted);
     }
