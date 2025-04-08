@@ -42,6 +42,8 @@
     <option value="title">Title (A–Z)</option>
     <option value="date">Date Created (Newest)</option>
     <option value="bytes">Number of Bytes</option>
+    <option value="oneliner">One-Liners</option>
+    <option value="awesomeness">Awesomeness</option>
   </select>
 
   <div id="graph-list"></div>
@@ -54,6 +56,7 @@
         link: "https://www.desmos.com/calculator/vpibnxiqsz",
         date: "2024-07-12",
         bytes: 0
+        oneliner: 0
       },
       {
         title: "Thomae Function",
@@ -61,9 +64,22 @@
         link: "https://www.desmos.com/calculator/qaoepurcpx",
         date: "2025-03-09",
         bytes: 0
+        oneliner: 0
+      }
+      {
+        title: "MATH",
+        image: "Images/MATH.png",
+        link: "https://www.desmos.com/calculator/5sjeakxzl7",
+        date: "2025-03-29",
+        bytes: 0
+        oneliner: 1
       }
     ];
 
+    graphs.forEach((graph, index) => {
+      graph.originalIndex = index;
+    });
+        
     const listDiv = document.getElementById("graph-list");
     const sortSelect = document.getElementById("sort-select");
 
@@ -77,6 +93,7 @@
           <p><strong><a href="${graph.link}" target="_blank">${graph.title}</a></strong></p>
           <p>Date Created: ${graph.date}</p>
           <p>Number of Bytes: ${graph.bytes}</p>
+          <p>One-liner: ${graph.oneliner ? "Yes" : "No"}</p>
           <hr>
         `;
         listDiv.appendChild(div);
@@ -92,6 +109,15 @@
         sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
       } else if (sortBy === "bytes") {
         sorted.sort((a, b) => b.bytes - a.bytes);
+      } else if (sortBy === "oneliner") {
+        sorted.sort((a, b) => {
+          if (b.oneliner === a.oneliner) {
+            return a.originalIndex - b.originalIndex;
+          }
+          return b.oneliner - a.oneliner;
+        });
+      } else if (sortBy === "awesomeness") {
+        sorted = [...originalGraphs];
       }
       renderGraphs(sorted);
     }
