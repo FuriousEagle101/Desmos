@@ -43,6 +43,7 @@
     <option value="date">Date Created (Newest)</option>
     <option value="bytes">Number of Bytes</option>
     <option value="oneliner">One-Liners</option>
+    <option value="interactive">Interactive</option>
     <option value="awesomeness">Awesomeness</option>
   </select>
 
@@ -52,27 +53,27 @@
     const graphs = [
       {
         title: "Mandelbrot Set 2.0",
-        image: "Images/Mandelbrot Set 2.0.png",
         link: "https://www.desmos.com/calculator/vpibnxiqsz",
         date: "2024-07-12",
         bytes: 0,
-        oneliner: 0
+        oneliner: 0,
+        interactive: 0
       },
       {
         title: "Thomae Function",
-        image: "Images/Thomae Function.png",
         link: "https://www.desmos.com/calculator/qaoepurcpx",
         date: "2025-03-09",
         bytes: 0,
-        oneliner: 0
+        oneliner: 0,
+        interactive: 0
       }
       {
         title: "MATH",
-        image: "Images/MATH.png",
         link: "https://www.desmos.com/calculator/5sjeakxzl7",
         date: "2025-03-29",
         bytes: 0,
-        oneliner: 1
+        oneliner: 1,
+        interactive: 0
       }
     ];
 
@@ -89,11 +90,12 @@
         const div = document.createElement("div");
         div.className = "graph";
         div.innerHTML = `
-          <img src="${graph.image}" alt="${graph.title}">
+          <img src="Images/${graph.title}.png" alt="${graph.title}">
           <p><strong><a href="${graph.link}" target="_blank">${graph.title}</a></strong></p>
           <p>Date Created: ${graph.date}</p>
           <p>Number of Bytes: ${graph.bytes}</p>
           <p>One-liner: ${graph.oneliner ? "Yes" : "No"}</p>
+          <p>Interactive: ${graph.interactive ? "Yes" : "No"}</p>
           <hr>
         `;
         listDiv.appendChild(div);
@@ -115,6 +117,13 @@
             return a.originalIndex - b.originalIndex;
           }
           return b.oneliner - a.oneliner;
+        });
+      else if (sortBy === "interactive") {
+        sorted.sort((a, b) => {
+          if (b.interactive === a.interactive) {
+            return a.originalIndex - b.originalIndex;
+          }
+          return b.interactive - a.interactive;
         });
       } else if (sortBy === "awesomeness") {
         sorted.sort((a, b) => b.originalIndex - a.originalIndex);
