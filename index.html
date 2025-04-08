@@ -39,13 +39,13 @@
   
   <label for="sort-select">Sort by: </label>
   <select id="sort-select">
+    <option value="awesomeness">Awesomeness</option>
     <option value="title">Title (A–Z)</option>
     <option value="date">Date Created (Newest)</option>
     <option value="bytes">Number of Bytes</option>
     <option value="oneliner">One-Liners</option>
     <option value="interactive">Interactive</option>
     <option value="moving">Moving</option>
-    <option value="awesomeness">Awesomeness</option>
   </select>
 
   <div id="graph-list"></div>
@@ -318,7 +318,7 @@
           return b.moving - a.moving;
         });
       } else if (sortBy === "awesomeness") {
-        sorted.sort((a, b) => b.originalIndex - a.originalIndex);
+        sorted.sort((a, b) => a.originalIndex - b.originalIndex);
       }
       renderGraphs(sorted);
     }
