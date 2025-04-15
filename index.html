@@ -45,7 +45,7 @@
     <option value="bytes">Number of Bytes</option>
     <option value="oneliner">One-Liners</option>
     <option value="interactive">Interactive</option>
-    <option value="moving">Moving</option>
+    <option value="animation">Animation</option>
   </select>
 
   <div id="graph-list"></div>
@@ -54,111 +54,120 @@
     const graphs = [
       {
         title: "Euclidean Space",
-        link: "",
-        date: "",
-        bytes: 0,
-        oneliner: 00000,
-        interactive: 00000,
-        moving: 00000
+        link: "https://www.desmos.com/calculator/f0fgsglxfr",
+        date: "2024-01-15",
+        bytes: 802445,
+        oneliner: 0,
+        interactive: 1,
+        animation: 1
       },
       {
         title: "Conway's Game of Life",
-        link: "",
-        date: "",
-        bytes: 0,
-        oneliner: 00000,
-        interactive: 00000,
-        moving: 00000
+        link: "https://www.desmos.com/calculator/wl2ixodafo",
+        date: "2024-12-02",
+        bytes: 8465,
+        oneliner: 0,
+        interactive: 1,
+        animation: 0
       },
       {
         title: "Mandelbrot Set 2.0",
         link: "https://www.desmos.com/calculator/vpibnxiqsz",
-        date: "2024-07-12",
+        date: "2024-07-11",
         bytes: 0,
         oneliner: 0,
         interactive: 0,
-        moving: 0
+        animation: 0
       },
       {
         title: "Randomly Generated Sierpinski Triangle",
-        link: "",
-        date: "",
+        link: "https://www.desmos.com/calculator/fjklpee7yw",
+        date: "2025-01-23",
         bytes: 0,
-        oneliner: 00000,
-        interactive: 00000,
-        moving: 00000
+        oneliner: 0,
+        interactive: 1,
+        animation: 0
       },
       {
         title: "Binary Image",
-        link: "",
-        date: "",
-        bytes: 0,
-        oneliner: 00000,
-        interactive: 00000,
-        moving: 00000
+        link: "https://www.desmos.com/calculator/d6kyvgiea3",
+        date: "2023-11-02",
+        bytes: 3120,
+        oneliner: 0,
+        interactive: 1,
+        animation: 0
       },
       {
         title: "Inverse Mandelbrot Set",
-        link: "",
-        date: "",
-        bytes: 0,
-        oneliner: 00000,
-        interactive: 00000,
-        moving: 00000
+        link: "https://www.desmos.com/calculator/6lsjudp7j5",
+        date: "2024-03-02",
+        bytes: 16579,
+        oneliner: 0,
+        interactive: 0,
+        animation: 0
       },
       {
         title: "Complex Plane",
-        link: "",
-        date: "",
+        link: "https://www.desmos.com/calculator/txwjcogbfa",
+        date: "2023-11-30",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Mandelbrot Set",
         link: "",
-        date: "",
+        date: "2023-05-12",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Mandelbrot Set 3.0",
         link: "",
-        date: "",
+        date: "2024-12-01",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Newton's Fractal 2.0",
         link: "",
-        date: "",
+        date: "2025-04-07",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Newton's Fractal",
         link: "",
-        date: "",
+        date: "2024-12-02",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
+      },
+      {
+        title: "Fractal Pac-Man (Frac-Man)",
+        link: "",
+        date: "2024-03-01",
+        bytes: 0,
+        oneliner: 00000,
+        interactive: 00000,
+        animation: 00000
       },
       {
         title: "Burning Ship Fractal",
-        link: "",
+        link: "2024-04-05",
         date: "",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Thomae Function",
@@ -167,43 +176,52 @@
         bytes: 0,
         oneliner: 0,
         interactive: 0,
-        moving: 0
+        animation: 0
       },
       {
         title: "Weierstrass Function",
-        link: "",
+        link: "2024-10-26",
         date: "",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Mandelbrot^3",
         link: "",
-        date: "",
+        date: "2024-03-01",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Pac-Man",
         link: "",
-        date: "",
+        date: "2023-08-12",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Normal Curve",
         link: "",
-        date: "",
+        date: "2024-06-19",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
+      },
+      {
+        title: "Fermat Test Scores (2023)",
+        link: "",
+        date: "2023-03-20",
+        bytes: 0,
+        oneliner: 00000,
+        interactive: 00000,
+        animation: 00000
       },
       {
         title: "MATH One-Liner",
@@ -212,52 +230,61 @@
         bytes: 0,
         oneliner: 1,
         interactive: 0,
-        moving: 0
+        animation: 0
       },
       {
         title: "Mandelbrot^1.5",
         link: "",
-        date: "",
+        date: "2024-03-01",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Swirling Orbs",
         link: "",
-        date: "",
+        date: "2023-02-14",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
+      },
+      {
+        title: "Decay of Protactinium 231",
+        link: "",
+        date: "2023-11-28",
+        bytes: 0,
+        oneliner: 00000,
+        interactive: 00000,
+        animation: 00000
       },
       {
         title: "Butterfly Curve",
         link: "",
-        date: "",
+        date: "2025-03-30",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Hypnotization",
         link: "",
-        date: "",
+        date: "2023-03-08",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       },
       {
         title: "Ghost",
         link: "",
-        date: "",
+        date: "2022-10-31",
         bytes: 0,
         oneliner: 00000,
         interactive: 00000,
-        moving: 00000
+        animation: 00000
       }
     ];
 
@@ -280,7 +307,7 @@
           <p>Number of Bytes: ${graph.bytes}</p>
           <p>One-liner: ${graph.oneliner ? "Yes" : "No"}</p>
           <p>Interactive: ${graph.interactive ? "Yes" : "No"}</p>
-          <p>Moving: ${graph.moving ? "Yes" : "No"}</p>
+          <p>Animation: ${graph.animation ? "Yes" : "No"}</p>
           <hr>
         `;
         listDiv.appendChild(div);
@@ -310,12 +337,12 @@
           }
           return b.interactive - a.interactive;
         });
-      } else if (sortBy === "moving") {
+      } else if (sortBy === "animation") {
         sorted.sort((a, b) => {
-          if (b.moving === a.moving) {
+          if (b.animation === a.animation) {
             return a.originalIndex - b.originalIndex;
           }
-          return b.moving - a.moving;
+          return b.animation - a.animation;
         });
       } else if (sortBy === "awesomeness") {
         sorted.sort((a, b) => a.originalIndex - b.originalIndex);
