@@ -48,6 +48,9 @@
     <option value="animation">Animation</option>
   </select>
 
+  <button id="filter-animation">Animation: All</button>
+  <button id="filter-fractal">Fractal: All</button>
+  
   <div id="graph-list"></div>
 
   <script>
@@ -59,7 +62,8 @@
         bytes: 802445,
         oneliner: 0,
         interactive: 1,
-        animation: 1
+        animation: 1,
+        fractal: 0
       },
       {
         title: "Conway's Game of Life",
@@ -68,25 +72,28 @@
         bytes: 8465,
         oneliner: 0,
         interactive: 1,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "Mandelbrot Set 2.0",
         link: "https://www.desmos.com/calculator/vpibnxiqsz",
         date: "2024-07-11",
-        bytes: 0,
+        bytes: 2169,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Randomly Generated Sierpinski Triangle",
         link: "https://www.desmos.com/calculator/fjklpee7yw",
         date: "2025-01-23",
-        bytes: 0,
+        bytes: 2100,
         oneliner: 0,
         interactive: 1,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Binary Image",
@@ -95,7 +102,8 @@
         bytes: 3120,
         oneliner: 0,
         interactive: 1,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "Inverse Mandelbrot Set",
@@ -104,7 +112,8 @@
         bytes: 16579,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Complex Plane",
@@ -113,7 +122,8 @@
         bytes: 2005,
         oneliner: 0,
         interactive: 1,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "Mandelbrot Set",
@@ -122,7 +132,8 @@
         bytes: 28210,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Mandelbrot Set 3.0",
@@ -131,7 +142,8 @@
         bytes: 1826,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Newton's Fractal 2.0",
@@ -140,7 +152,8 @@
         bytes: 1668,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Newton's Fractal",
@@ -149,7 +162,8 @@
         bytes: 2269,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Fractal Pac-Man (Frac-Man)",
@@ -158,7 +172,8 @@
         bytes: 16283,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Burning Ship Fractal",
@@ -167,7 +182,8 @@
         bytes: 28393,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Thomae Function",
@@ -176,7 +192,8 @@
         bytes: 1301,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "Weierstrass Function",
@@ -185,7 +202,8 @@
         bytes: 854,
         oneliner: 1,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "Mandelbrot^3",
@@ -194,7 +212,8 @@
         bytes: 28252,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Pac-Man",
@@ -203,7 +222,8 @@
         bytes: 1427,
         oneliner: 0,
         interactive: 0,
-        animation: 1
+        animation: 1,
+        fractal: 0
       },
       {
         title: "Normal Curve",
@@ -212,7 +232,8 @@
         bytes: 1282,
         oneliner: 0,
         interactive: 1,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "Fermat Test Scores (2023)",
@@ -221,7 +242,8 @@
         bytes: 3756,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "MATH One-Liner",
@@ -230,7 +252,8 @@
         bytes: 758,
         oneliner: 1,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "Mandelbrot^1.5",
@@ -239,7 +262,8 @@
         bytes: 28620,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 1
       },
       {
         title: "Swirling Orbs",
@@ -248,7 +272,8 @@
         bytes: 2949,
         oneliner: 0,
         interactive: 0,
-        animation: 1
+        animation: 1,
+        fractal: 0
       },
       {
         title: "Decay of Protactinium 231",
@@ -257,7 +282,8 @@
         bytes: 3290,
         oneliner: 0,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "Butterfly Curve",
@@ -266,7 +292,8 @@
         bytes: 1112,
         oneliner: 1,
         interactive: 0,
-        animation: 0
+        animation: 0,
+        fractal: 0
       },
       {
         title: "Hypnotization",
@@ -275,7 +302,8 @@
         bytes: 2389,
         oneliner: 0,
         interactive: 0,
-        animation: 1
+        animation: 1,
+        fractal: 0
       },
       {
         title: "Ghost",
@@ -284,7 +312,8 @@
         bytes: 1970,
         oneliner: 0,
         interactive: 0,
-        animation: 1
+        animation: 1,
+        fractal: 0
       }
     ];
 
