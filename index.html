@@ -72,7 +72,7 @@
           <p>Interactive: ${graph.interactive ? "Yes" : "No"}</p>
           <p>Animation: ${graph.animation ? "Yes" : "No"}</p>
           <p>Fractal: ${graph.fractal ? "Yes" : "No"}</p>
-          <p>3D: ${graph.3d ? "Yes" : "No"}</p>
+          <p>3D: ${graph.is3d ? "Yes" : "No"}</p>
           <hr>
         `;
         listDiv.appendChild(div);
@@ -118,7 +118,7 @@
         interactive: +d.interactive,
         animation: +d.animation,
         fractal: +d.fractal,
-        fractal: +d.3d,
+        fractal: +d.is3d,
         originalIndex: i
       }));
     
