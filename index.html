@@ -78,8 +78,11 @@
     }
     
     function sortAndRender(data) {
+      if (!data) return; // nothing to do if no data
+    
       const sortBy = sortSelect.value;
       const sorted = [...data];
+    
       if (sortBy === "title") {
         sorted.sort((a, b) => a.title.localeCompare(b.title));
       } else if (sortBy === "date") {
@@ -93,21 +96,17 @@
       } else if (sortBy === "animation") {
         sorted.sort((a, b) => b.animation - a.animation);
       } else if (sortBy === "awesomeness") {
-        // If you want some default order, maybe by title asc
-        sorted.sort((a, b) => a.title.localeCompare(b.title));
+        sorted.sort((a, b) => a.originalIndex - b.originalIndex);
       }
+    
       renderGraphs(sorted);
     }
     
     sortSelect.addEventListener("change", () => {
-      if (window.graphsData) {
-        sortAndRender(window.graphsData);
-      }
+      sortAndRender(window.graphsData);
     });
     
-    // Load CSV and initialize:
     d3.csv("Graph%20Data.csv").then(rawData => {
-      // Convert string fields to proper types
       window.graphsData = rawData.map((d, i) => ({
         title: d.title,
         link: d.link,
@@ -119,77 +118,13 @@
         fractal: +d.fractal,
         originalIndex: i
       }));
+    
       sortAndRender(window.graphsData);
     }).catch(err => {
       listDiv.innerHTML = "<p>Failed to load graph data.</p>";
       console.error(err);
     });
 
-
-    graphs.forEach((graph, index) => {
-      graph.originalIndex = index;
-    });
-        
-    const listDiv = document.getElementById("graph-list");
-    const sortSelect = document.getElementById("sort-select");
-
-    function renderGraphs(data) {
-      listDiv.innerHTML = ""; // Clear old list
-      data.forEach(graph => {
-        const div = document.createElement("div");
-        div.className = "graph";
-        div.innerHTML = `
-          <img src="Images/${graph.title}.png" alt="${graph.title}">
-          <p><strong><a href="${graph.link}" target="_blank">${graph.title}</a></strong></p>
-          <p>Date Created: ${graph.date}</p>
-          <p>Number of Bytes: ${graph.bytes}</p>
-          <p>One-liner: ${graph.oneliner ? "Yes" : "No"}</p>
-          <p>Interactive: ${graph.interactive ? "Yes" : "No"}</p>
-          <p>Animation: ${graph.animation ? "Yes" : "No"}</p>
-          <hr>
-        `;
-        listDiv.appendChild(div);
-      });
-    }
-
-    function sortAndRender() {
-      const sortBy = sortSelect.value;
-      const sorted = [...graphs];
-      if (sortBy === "title") {
-        sorted.sort((a, b) => a.title.localeCompare(b.title));
-      } else if (sortBy === "date") {
-        sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
-      } else if (sortBy === "bytes") {
-        sorted.sort((a, b) => b.bytes - a.bytes);
-      } else if (sortBy === "oneliner") {
-        sorted.sort((a, b) => {
-          if (b.oneliner === a.oneliner) {
-            return a.originalIndex - b.originalIndex;
-          }
-          return b.oneliner - a.oneliner;
-        });
-      } else if (sortBy === "interactive") {
-        sorted.sort((a, b) => {
-          if (b.interactive === a.interactive) {
-            return a.originalIndex - b.originalIndex;
-          }
-          return b.interactive - a.interactive;
-        });
-      } else if (sortBy === "animation") {
-        sorted.sort((a, b) => {
-          if (b.animation === a.animation) {
-            return a.originalIndex - b.originalIndex;
-          }
-          return b.animation - a.animation;
-        });
-      } else if (sortBy === "awesomeness") {
-        sorted.sort((a, b) => a.originalIndex - b.originalIndex);
-      }
-      renderGraphs(sorted);
-    }
-
-    sortSelect.addEventListener("change", sortAndRender);
-    sortAndRender();
   </script>
 
 </body>
