@@ -32,32 +32,47 @@
     }
   </style>
 </head>
-  
+
 <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
-  
+
 <body>
   <h1>Desmos Demos</h1>
-  
+
   <label for="sort-select">Sort by: </label>
   <select id="sort-select">
     <option value="awesomeness">Awesomeness</option>
-    <option value="title">Title (A–Z)</option>
+    <option value="title">Title (A-Z)</option>
     <option value="date">Date Created (Newest)</option>
-    <option value="bytes">Number of Bytes</option>
-    <option value="oneliner">One-Liners</option>
-    <option value="interactive">Interactive</option>
-    <option value="animation">Animation</option>
+    <option value="bytes">Size (In Bytes)</option>
   </select>
 
-  <button id="filter-animation">Animation: All</button>
-  <button id="filter-fractal">Fractal: All</button>
-  
+  <label>One-liner: </label>
+  <button id="filter-oneliner">All</button>
+  <label>Interactive: </label>
+  <button id="filter-interactive">All</button>
+  <label>Animation: </label>
+  <button id="filter-animation">All</button>
+  <label>Fractal: </label>
+  <button id="filter-fractal">All</button>
+  <label>3D: </label>
+  <button id="filter-is3d">All</button>
+
   <div id="graph-list"></div>
 
   <script>
+    // Unicode characters for check and cross marks:
+    const checkMark = "\u2705"; // ✅
+    const crossMark = "\u274C"; // ❌
+
+    let onelinerFilter = "all"; // Possible values: "all", "✅", "❌"
+    let interactiveFilter = "all";
+    let animationFilter = "all";
+    let fractalFilter = "all";
+    let is3dFilter = "all";
+
     const listDiv = document.getElementById("graph-list");
     const sortSelect = document.getElementById("sort-select");
-    
+
     function renderGraphs(data) {
       listDiv.innerHTML = ""; // Clear old list
       data.forEach(graph => {
@@ -68,46 +83,67 @@
           <p><strong><a href="${graph.link}" target="_blank">${graph.title}</a></strong></p>
           <p>Date Created: ${graph.date}</p>
           <p>Number of Bytes: ${graph.bytes}</p>
-          <p>One-liner: ${graph.oneliner ? "Yes" : "No"}</p>
-          <p>Interactive: ${graph.interactive ? "Yes" : "No"}</p>
-          <p>Animation: ${graph.animation ? "Yes" : "No"}</p>
-          <p>Fractal: ${graph.fractal ? "Yes" : "No"}</p>
-          <p>3D: ${graph.is3d ? "Yes" : "No"}</p>
+          <p>One-liner: ${graph.oneliner ? checkMark : crossMark}</p>
+          <p>Interactive: ${graph.interactive ? checkMark : crossMark}</p>
+          <p>Animation: ${graph.animation ? checkMark : crossMark}</p>
+          <p>Fractal: ${graph.fractal ? checkMark : crossMark}</p>
+          <p>3D: ${graph.is3d ? checkMark : crossMark}</p>
           <hr>
         `;
         listDiv.appendChild(div);
       });
     }
-    
+
     function sortAndRender(data) {
-      if (!data) return; // nothing to do if no data
-    
+      if (!data) return;
+
+      // Filter data by current filters
+      const filtered = data.filter(graph => {
+        const onelinerOk =
+          onelinerFilter === "all" ||
+          (onelinerFilter === checkMark && graph.oneliner) ||
+          (onelinerFilter === crossMark && !graph.oneliner);
+
+        const interactiveOk =
+          interactiveFilter === "all" ||
+          (interactiveFilter === checkMark && graph.interactive) ||
+          (interactiveFilter === crossMark && !graph.interactive);
+
+        const animationOk =
+          animationFilter === "all" ||
+          (animationFilter === checkMark && graph.animation) ||
+          (animationFilter === crossMark && !graph.animation);
+
+        const fractalOk =
+          fractalFilter === "all" ||
+          (fractalFilter === checkMark && graph.fractal) ||
+          (fractalFilter === crossMark && !graph.fractal);
+
+        const is3dOk =
+          is3dFilter === "all" ||
+          (is3dFilter === checkMark && graph.is3d) ||
+          (is3dFilter === crossMark && !graph.is3d);
+
+        return onelinerOk && interactiveOk && animationOk && fractalOk && is3dOk;
+      });
+
+      // Sort filtered data
       const sortBy = sortSelect.value;
-      const sorted = [...data];
-    
+      const sorted = [...filtered];
+
       if (sortBy === "title") {
         sorted.sort((a, b) => a.title.localeCompare(b.title));
       } else if (sortBy === "date") {
         sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
       } else if (sortBy === "bytes") {
         sorted.sort((a, b) => b.bytes - a.bytes);
-      } else if (sortBy === "oneliner") {
-        sorted.sort((a, b) => b.oneliner - a.oneliner);
-      } else if (sortBy === "interactive") {
-        sorted.sort((a, b) => b.interactive - a.interactive);
-      } else if (sortBy === "animation") {
-        sorted.sort((a, b) => b.animation - a.animation);
       } else if (sortBy === "awesomeness") {
         sorted.sort((a, b) => a.originalIndex - b.originalIndex);
       }
-    
+
       renderGraphs(sorted);
     }
-    
-    sortSelect.addEventListener("change", () => {
-      sortAndRender(window.graphsData);
-    });
-    
+
     d3.csv("Graph%20Data.csv").then(rawData => {
       window.graphsData = rawData.map((d, i) => ({
         title: d.title,
@@ -121,13 +157,80 @@
         is3d: +d.is3d,
         originalIndex: i
       }));
-    
+
+      // Attach event listeners
+
+      // Sort dropdown change
+      sortSelect.addEventListener("change", () => {
+        sortAndRender(window.graphsData);
+      });
+
+      // One-liner filter button toggle
+      document.getElementById("filter-oneliner").addEventListener("click", () => {
+        if (onelinerFilter === "all") onelinerFilter = checkMark;
+        else if (onelinerFilter === checkMark) onelinerFilter = crossMark;
+        else onelinerFilter = "all";
+
+        const text = onelinerFilter === "all" ? "All" : onelinerFilter;
+        document.getElementById("filter-oneliner").innerText = text;
+
+        sortAndRender(window.graphsData);
+      });
+
+      // Interactive filter button toggle
+      document.getElementById("filter-interactive").addEventListener("click", () => {
+        if (interactiveFilter === "all") interactiveFilter = checkMark;
+        else if (interactiveFilter === checkMark) interactiveFilter = crossMark;
+        else interactiveFilter = "all";
+
+        const text = interactiveFilter === "all" ? "All" : interactiveFilter;
+        document.getElementById("filter-interactive").innerText = text;
+
+        sortAndRender(window.graphsData);
+      });
+
+      // Animation filter button toggle
+      document.getElementById("filter-animation").addEventListener("click", () => {
+        if (animationFilter === "all") animationFilter = checkMark;
+        else if (animationFilter === checkMark) animationFilter = crossMark;
+        else animationFilter = "all";
+
+        const text = animationFilter === "all" ? "All" : animationFilter;
+        document.getElementById("filter-animation").innerText = text;
+
+        sortAndRender(window.graphsData);
+      });
+
+      // Fractal filter button toggle
+      document.getElementById("filter-fractal").addEventListener("click", () => {
+        if (fractalFilter === "all") fractalFilter = checkMark;
+        else if (fractalFilter === checkMark) fractalFilter = crossMark;
+        else fractalFilter = "all";
+
+        const text = fractalFilter === "all" ? "All" : fractalFilter;
+        document.getElementById("filter-fractal").innerText = text;
+
+        sortAndRender(window.graphsData);
+      });
+
+      // 3d filter button toggle
+      document.getElementById("filter-is3d").addEventListener("click", () => {
+        if (is3dFilter === "all") is3dFilter = checkMark;
+        else if (is3dFilter === checkMark) is3dFilter = crossMark;
+        else is3dFilter = "all";
+
+        const text = is3dFilter === "all" ? "All" : is3dFilter;
+        document.getElementById("filter-is3d").innerText = text;
+
+        sortAndRender(window.graphsData);
+      });
+
+      // Initial render
       sortAndRender(window.graphsData);
     }).catch(err => {
       listDiv.innerHTML = "<p>Failed to load graph data.</p>";
       console.error(err);
     });
-
   </script>
 
 </body>
