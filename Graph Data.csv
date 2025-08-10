@@ -2,8 +2,8 @@ title,link,date,bytes,oneliner,interactive,animation,fractal,is3d
 Euclidean Space,https://www.desmos.com/calculator/f0fgsglxfr,2024-01-15,802445,0,1,0,0,0
 Conway's Game of Life,https://www.desmos.com/calculator/wl2ixodafo,2024-12-02,8465,0,1,0,0,0
 Mandelbrot Set 2.0,https://www.desmos.com/calculator/vpibnxiqsz,2024-07-11,2169,0,0,0,1,0
-Randomly Generated Sierpinski Triangle,https://www.desmos.com/calculator/fjklpee7yw,2025-01-23,2100,0,1,0,1,0
-Randomly Generated Sierpinski Tetrahedron,https://www.desmos.com/3d/senaotutml,2025-06-06,0,0,1,0,1,1
+Randomly Generated Sierpinski Triangle,https://www.desmos.com/calculator/fjklpee7yw,2025-01-23,2239,0,1,0,1,0
+Randomly Generated Sierpinski Tetrahedron,https://www.desmos.com/3d/senaotutml,2025-06-06,2827,0,1,0,1,1
 Hilbert Curve,https://www.desmos.com/calculator/4on9ebg9wh,2025-06-05,2481,0,0,0,1,0
 Binary Image,https://www.desmos.com/calculator/d6kyvgiea3,2023-11-02,3120,0,1,0,0,0
 Inverse Mandelbrot Set,https://www.desmos.com/calculator/6lsjudp7j5,2024-03-02,16579,0,0,0,1,0
@@ -15,6 +15,7 @@ Newton's Fractal,https://www.desmos.com/calculator/jt4cwobmrg,2024-12-02,2269,0,
 Fractal Pac-Man (Frac-Man),https://www.desmos.com/calculator/puijkvmdgv,2024-03-01,16283,0,0,0,1,0
 Burning Ship Fractal,https://www.desmos.com/calculator/zni4i8nati,2024-04-05,28393,0,0,0,1,0
 Landscape Generator,https://www.desmos.com/calculator/8vgjjnxumi,2025-05-14,3646,0,1,0,0,0
+Stereographic Projections,https://www.desmos.com/3d/dflsnta5qp,2025-08-10,1335,1,1,0,0,1
 Thomae Function,https://www.desmos.com/calculator/qaoepurcpx,2025-03-09,1301,0,0,0,0,0
 Weierstrass Function,https://www.desmos.com/calculator/u5oodbd7qx,2024-10-26,854,1,0,0,0,0
 Mandelbrot^3,https://www.desmos.com/calculator/thvpqda1hn,2024-03-01,28252,0,0,0,1,0
@@ -24,8 +25,8 @@ Fermat Contest Scores (2023),https://www.desmos.com/calculator/mcc7afvw8q,2023-0
 MATH One-Liner,https://www.desmos.com/calculator/2z9f2wj6fz,2025-03-29,758,1,0,0,0,0
 Ghost,https://www.desmos.com/calculator/mz2auktrfh,2022-10-31,1970,0,0,1,0,0
 Swirling Orbs,https://www.desmos.com/calculator/kdacmaopz3,2023-02-14,2949,0,0,1,0,0
-Planar Equation from 3 Points,https://www.desmos.com/3d/teao3tpcva,2024-03-20,0,1,1,0,0,1
-Planar Equation from 3 Vectors,https://www.desmos.com/3d/tyylyoqytp,2025-02-08,0,0,1,0,0,1
+Planar Equation from 3 Points,https://www.desmos.com/3d/teao3tpcva,2024-03-20,1667,1,1,0,0,1
+Planar Equation from 3 Vectors,https://www.desmos.com/3d/tyylyoqytp,2025-02-08,4029,0,1,0,0,1
 Mandelbrot^1.5,https://www.desmos.com/calculator/d8gpt8u8wh,2024-03-01,28620,0,0,0,1,0
 Hypnotization,https://www.desmos.com/calculator/ewau1fole6,2022-11-08,2389,0,0,1,0,0
 Rainbow Lattice One-Liner,https://www.desmos.com/calculator/m02ogagfzw,2025-04-16,871,1,0,0,0,0
