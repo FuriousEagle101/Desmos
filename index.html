@@ -3,6 +3,9 @@
 <head>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <title>Desmos Demos</title>
+
+  <script src="https://www.desmos.com/api/v1.11/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+
   <style>
     body {
       font-family: sans-serif;
@@ -30,6 +33,16 @@
       padding: 5px;
       font-size: 16px;
     }
+
+    #calculator { width: 700px; height: 700px; }
+
+    .page {
+      display: none; /* hide all by default */
+    }
+    .page.active {
+      display: block; /* show only the active one */
+    }
+
   </style>
 </head>
 
@@ -37,6 +50,14 @@
 
 <body>
   <h1>Desmos Demos</h1>
+
+<!-- Navigation buttons -->
+<button onclick="showPage('page1')">Graphs</button>
+<button onclick="showPage('page2')">Data</button>
+<br><br>
+
+<!-- Page 1 content -->
+<div id="page1" class="page active">
 
   <label for="sort-select">Sort by: </label>
   <select id="sort-select">
@@ -232,6 +253,419 @@
       console.error(err);
     });
   </script>
+
+</div>
+
+<!-- Page 2 content -->
+<div id="page2" class="page">
+
+<h3>Desmos Demos Meta-Data (In a desmos graph &#x1F44D)</h3>
+  <div id="calculator"></div>
+
+  <script>
+    const CSV_URL = "https://raw.githubusercontent.com/FuriousEagle101/Desmos/refs/heads/main/Graph%20Data.csv";
+    const elt = document.getElementById('calculator');
+    const calculator = Desmos.GraphingCalculator(elt, { expressions: true, expressionsCollapsed: true});
+
+// ------------------------------------------------------------------------
+
+    const savedState = {
+    "version": 11,
+    "randomSeed": "112a1b42d4611b6e5fb2fdb66c8de200",
+    "graph": {
+        "viewport": {
+            "xmin": -1,
+            "ymin": -1,
+            "xmax": 1,
+            "ymax": 1
+        },
+        "xAxisNumbers": false,
+        "yAxisNumbers": false,
+        "polarNumbers": false,
+        "userLockedViewport": true,
+        "squareAxes": false,
+        "__v12ViewportLatexStash": {
+            "xmin": "-1",
+            "xmax": "1",
+            "ymin": "-1",
+            "ymax": "1"
+        }
+    },
+    "expressions": {
+        "list": [
+            {
+                "type": "folder",
+                "id": "105",
+                "title": "Calculated Columns & Measures",
+                "collapsed": true
+            },
+            {
+                "type": "expression",
+                "id": "96",
+                "folderId": "105",
+                "color": "#c74440",
+                "latex": "N=\\operatorname{length}\\left(d_{ate}\\right)"
+            },
+            {
+                "type": "expression",
+                "id": "53",
+                "folderId": "105",
+                "color": "#c74440",
+                "latex": "c_{ountToDate}=\\sum_{n=1}^{N}\\left\\{d_{ate}\\left[n\\right]>d_{ate}:0,1\\right\\}"
+            },
+            {
+                "type": "expression",
+                "id": "111",
+                "folderId": "105",
+                "color": "#c74440",
+                "latex": "c_{ountByType}=\\sum_{n=1}^{N}\\left[o_{neliner}\\left[n\\right],i_{nteractive}\\left[n\\right],a_{nimation}\\left[n\\right],f_{ractal}\\left[n\\right],i_{s3d}\\left[n\\right]\\right]"
+            },
+            {
+                "type": "expression",
+                "id": "139",
+                "folderId": "105",
+                "color": "#2d70b3",
+                "latex": "y_{ears}=\\left[\\operatorname{floor}\\left(\\min\\left(d_{ate}\\right)\\right)...\\operatorname{floor}\\left(\\max\\left(d_{ate}\\right)\\right)\\right]"
+            },
+            {
+                "type": "expression",
+                "id": "164",
+                "folderId": "105",
+                "color": "#c74440",
+                "latex": "N_{years}=\\operatorname{length}\\left(y_{ears}\\right)"
+            },
+            {
+                "type": "expression",
+                "id": "138",
+                "folderId": "105",
+                "color": "#c74440",
+                "latex": "c_{ountByYear}=\\sum_{n=y_{ears}}^{y_{ears}}\\left(\\sum_{k=1}^{N}\\left\\{\\operatorname{floor}\\left(d_{ate}\\left[k\\right]\\right)=n:1,0\\right\\}\\right)"
+            },
+            {
+                "type": "expression",
+                "id": "152",
+                "folderId": "105",
+                "color": "#000000",
+                "latex": "c_{ountToYear}=\\sum_{n=y_{ears}}^{y_{ears}}\\left(\\sum_{k=1}^{N}\\left\\{\\operatorname{floor}\\left(d_{ate}\\left[k\\right]\\right)<n:1,0\\right\\}\\right)"
+            },
+            {
+                "type": "folder",
+                "id": "114",
+                "title": "Total Graphs",
+                "collapsed": true
+            },
+            {
+                "type": "expression",
+                "id": "94",
+                "folderId": "114",
+                "color": "#000000",
+                "latex": "\\left(-0.5,0.55\\right)",
+                "showLabel": true,
+                "label": "${N}",
+                "hidden": true,
+                "labelSize": "6"
+            },
+            {
+                "type": "expression",
+                "id": "115",
+                "folderId": "114",
+                "color": "#000000",
+                "latex": "\\left(-0.5,0.3\\right)",
+                "showLabel": true,
+                "label": "Total Graphs",
+                "hidden": true,
+                "labelSize": "3"
+            },
+            {
+                "type": "folder",
+                "id": "107",
+                "title": "Scatterplot"
+            },
+            {
+                "type": "expression",
+                "id": "89",
+                "folderId": "107",
+                "color": "#2d70b3",
+                "latex": "\\left(\\frac{d_{ate}-\\min\\left(d_{ate}\\right)}{\\max\\left(d_{ate}\\right)-\\min\\left(d_{ate}\\right)}\\cdot\\frac{N}{N+2}+\\frac{1}{N+2},\\frac{c_{ountToDate}}{\\max\\left(c_{ountToDate}\\right)}\\cdot\\frac{N}{N+1}-1\\right)",
+                "pointSize": "0.6\\left(\\log\\left(b_{ytes}\\right)\\right)^{2}",
+                "movablePointSize": "0.6\\left(\\log\\left(b_{ytes}\\right)\\right)^{2}"
+            },
+            {
+                "type": "expression",
+                "id": "108",
+                "folderId": "107",
+                "color": "#2d70b3",
+                "latex": "\\left(0.4,-0.15\\right)",
+                "showLabel": true,
+                "label": "Number of Graphs over Time",
+                "hidden": true
+            },
+            {
+                "type": "folder",
+                "id": "109",
+                "title": "Bar Chart",
+                "collapsed": true
+            },
+            {
+                "type": "expression",
+                "id": "121",
+                "folderId": "109",
+                "color": "#388c46",
+                "latex": "X=\\left[\\frac{1}{16},\\frac{4}{16},\\frac{7}{16},\\frac{10}{16},\\frac{13}{16}\\right]"
+            },
+            {
+                "type": "expression",
+                "id": "117",
+                "folderId": "109",
+                "color": "#388c46",
+                "latex": "\\operatorname{polygon}\\left(\\left(X,\\frac{2}{16}\\right),\\left(X,\\frac{c_{ountByType}}{\\max\\left(c_{ountByType}\\right)}\\cdot\\frac{15}{16}\\right),\\left(X+\\frac{2}{16},\\frac{c_{ountByType}}{\\max\\left(c_{ountByType}\\right)}\\cdot\\frac{15}{16}\\right),\\left(X+\\frac{2}{16},\\frac{2}{16}\\right)\\right)",
+                "fillOpacity": "1",
+                "lineWidth": "0"
+            },
+            {
+                "type": "expression",
+                "id": "131",
+                "folderId": "109",
+                "color": "#388c46",
+                "latex": "\\left(X+\\frac{1}{16},\\frac{c_{ountByType}}{\\max\\left(c_{ountByType}\\right)}\\cdot\\frac{15}{16}-\\frac{1}{16}\\right)",
+                "showLabel": true,
+                "label": "${c_{ountByType}}",
+                "hidden": true
+            },
+            {
+                "type": "expression",
+                "id": "93",
+                "folderId": "109",
+                "color": "#388c46",
+                "latex": "\\left(\\frac{2}{16},\\frac{1}{16}\\right)",
+                "showLabel": true,
+                "label": "One-liner",
+                "hidden": true,
+                "labelAngle": "0.3"
+            },
+            {
+                "type": "expression",
+                "id": "130",
+                "folderId": "109",
+                "color": "#388c46",
+                "latex": "\\left(\\frac{5}{16},\\frac{1}{16}\\right)",
+                "showLabel": true,
+                "label": "Interactive",
+                "hidden": true,
+                "labelAngle": "0.3"
+            },
+            {
+                "type": "expression",
+                "id": "129",
+                "folderId": "109",
+                "color": "#388c46",
+                "latex": "\\left(\\frac{8}{16},\\frac{1}{16}\\right)",
+                "showLabel": true,
+                "label": "Animation",
+                "hidden": true,
+                "labelAngle": "0.3"
+            },
+            {
+                "type": "expression",
+                "id": "128",
+                "folderId": "109",
+                "color": "#388c46",
+                "latex": "\\left(\\frac{11}{16},\\frac{1}{16}\\right)",
+                "showLabel": true,
+                "label": "Fractal",
+                "hidden": true,
+                "labelAngle": "0.3"
+            },
+            {
+                "type": "expression",
+                "id": "127",
+                "folderId": "109",
+                "color": "#388c46",
+                "latex": "\\left(\\frac{14}{16},\\frac{1}{16}\\right)",
+                "showLabel": true,
+                "label": "3D",
+                "hidden": true,
+                "labelAngle": "0.3"
+            },
+            {
+                "type": "folder",
+                "id": "112",
+                "title": "Pie Chart",
+                "collapsed": true
+            },
+            {
+                "type": "expression",
+                "id": "91",
+                "folderId": "112",
+                "color": "#fa7e19",
+                "latex": "\\left(-0.5,-0.15\\right)",
+                "showLabel": true,
+                "label": "Number of Graphs by Year",
+                "hidden": true
+            },
+            {
+                "type": "expression",
+                "id": "161",
+                "folderId": "112",
+                "color": "#388c46",
+                "latex": "t_{1}=c_{ountToYear}\\cdot\\frac{2\\pi}{N}",
+                "hidden": true,
+                "slider": {
+                    "hardMin": true,
+                    "hardMax": true,
+                    "min": "0",
+                    "max": "2\\pi"
+                }
+            },
+            {
+                "type": "expression",
+                "id": "160",
+                "folderId": "112",
+                "color": "#388c46",
+                "latex": "t_{2}=\\left(c_{ountToYear}+c_{ountByYear}\\right)\\cdot\\frac{2\\pi}{N}",
+                "hidden": true,
+                "slider": {
+                    "hardMin": true,
+                    "hardMax": true,
+                    "min": "0",
+                    "max": "2\\pi"
+                }
+            },
+            {
+                "type": "expression",
+                "id": "163",
+                "folderId": "112",
+                "color": "#000000",
+                "latex": "c_{olours}=\\operatorname{hsv}\\left(50-\\frac{\\left[1...N_{years}\\right]-1}{N_{years}-1}50,1,1\\right)"
+            },
+            {
+                "type": "expression",
+                "id": "153",
+                "folderId": "112",
+                "color": "#fa7e19",
+                "latex": "\\left(x+0.5\\right)^{2}+\\left(y+0.5\\right)^{2}\\le0.25^{2}\\left\\{t_{1}-\\frac{\\pi}{2}\\le g\\left(x+0.5,y+0.5,t_{1}\\right)\\right\\}\\left\\{g\\left(x+0.5,y+0.5,t_{2}\\right)\\le t_{2}-\\frac{\\pi}{2}\\right\\}",
+                "colorLatex": "c_{olours}",
+                "fillOpacity": "1",
+                "lineWidth": "0"
+            },
+            {
+                "type": "expression",
+                "id": "159",
+                "folderId": "112",
+                "color": "#2d70b3",
+                "latex": "g\\left(x,y,t\\right)=-\\arctan\\left(\\frac{y}{x}\\right)-\\frac{x\\pi}{2\\left|x\\right|}+\\frac{\\pi}{2}"
+            },
+            {
+                "type": "expression",
+                "id": "166",
+                "folderId": "112",
+                "color": "#fa7e19",
+                "latex": "\\left(-0.5+0.25\\sin\\left(\\frac{t_{1}+t_{2}}{2}\\right),-0.5+0.25\\cos\\left(\\frac{t_{1}+t_{2}}{2}\\right)\\right)",
+                "showLabel": true,
+                "label": "${y_{ears}}",
+                "hidden": true,
+                "points": false,
+                "labelSize": "0.8"
+            }
+        ]
+    },
+    "includeFunctionParametersInRandomSeed": true,
+    "doNotMigrateMovablePointStyle": true
+}; // to be copy-pasted later
+
+    calculator.setState(savedState);
+
+// ------------------------------------------------------------------------
+
+    function parseCSV(text) {
+      const rows = text.split(/\r?\n/).filter(r => r.trim().length);
+      const header = rows.shift().split(',').map(h => h.trim());
+      const data = rows.map(r => {
+        const cols = r.split(',');
+        const obj = {};
+        header.forEach((h,i) => obj[h] = (cols[i]===undefined ? "" : cols[i].trim()));
+        return obj;
+      });
+      return { header, data };
+    }
+
+    function dateToDecimalYear(dateStr) {
+      const d = new Date(dateStr);
+      if (isNaN(d)) return NaN;
+      const year = d.getFullYear();
+      const start = new Date(year,0,1);
+      const end = new Date(year+1,0,1);
+      return year + (d - start) / (end - start);
+    }
+
+    fetch(CSV_URL)
+      .then(r => {
+        if (!r.ok) throw new Error('Network response not ok: ' + r.status);
+        return r.text();
+      })
+      .then(text => {
+        const { header, data } = parseCSV(text);
+
+        const exclude = ['title', 'link', 'date'];
+        const yCols = header.filter(h => !exclude.includes(h));
+
+        // x-values from date
+        const xValues = [];
+        data.forEach(row => {
+          const dv = dateToDecimalYear(row['date']);
+          xValues.push(!isNaN(dv) ? String(dv) : null);
+        });
+
+        // Prepare columns: first x, then y-columns
+        const columns = [
+          { latex: 'd_{ate}', values: xValues }
+        ];
+
+        yCols.forEach(col => {
+          const yVals = data.map((row, i) => {
+            const val = row[col];
+            if (val === undefined || val === "") return null;
+            if (val.toLowerCase && (val.toLowerCase() === 'true' || val.toLowerCase() === 'false')) {
+              return val.toLowerCase() === 'true' ? "1" : "0";
+            }
+            const num = Number(val);
+            return isNaN(num) ? null : String(num);
+          });
+          columns.push({ latex: col[0] + '_{' + col.slice(1) + '}', values: yVals, columnMode: Desmos.ColumnModes.LINES });
+        });
+
+        calculator.setExpression({
+          id: 'csvtable',
+          type: 'table',
+          columns: columns
+        });
+
+        // Set viewport nicely
+        const allX = xValues.filter(x => x !== null).map(Number);
+        const allY = columns.slice(1).flatMap(c => c.values.filter(v => v !== null).map(Number));
+
+        if (allX.length && allY.length) {
+          calculator.setMathBounds({
+            left: -1,
+            right: 1,
+            bottom: -1,
+            top: 1
+          });
+        }
+      })
+      .catch(err => console.error('Failed to load CSV:', err));
+  </script>
+
+</div>
+
+<script>
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(div => {
+    div.classList.remove('active');
+  });
+  document.getElementById(pageId).classList.add('active');
+}
+</script>
 
 </body>
 </html>
