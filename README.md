@@ -1,10 +1,4 @@
-# Desmos-Graphs
+# Desmos Demos
 
-Javascript code to get number of bytes:
-
-function getDesmosGraphByteSize(graph) {
-  const jsonStr = JSON.stringify(graph);
-  return new TextEncoder().encode(jsonStr).length;
-}
-const graphState = Calc.getState(); 
-console.log(getDesmosGraphByteSize(graphState), "bytes");
+This is my portfolio of Desmos creations including, but not limited to, fractals, annimations, math tools, and even a fully playable video game.
+View the site here: [furiouseagle101.github.io/Desmos](https://furiouseagle101.github.io/Desmos/)
