@@ -67,6 +67,8 @@
     <option value="bytes">Size (In Bytes)</option>
   </select>
 
+  <br>Filter by: 
+
   <label>One-liner: </label>
   <button id="filter-oneliner">All</button>
   <label>Interactive: </label>
@@ -75,8 +77,12 @@
   <button id="filter-animation">All</button>
   <label>Fractal: </label>
   <button id="filter-fractal">All</button>
+  <label>Video-inspired: </label>
+  <button id="filter-videoinspired">All</button>
   <label>3D: </label>
   <button id="filter-is3d">All</button>
+
+  <br><br>
 
   <div id="graph-list"></div>
 
@@ -89,6 +95,7 @@
     let interactiveFilter = "all";
     let animationFilter = "all";
     let fractalFilter = "all";
+    let videoinspiredFilter = "all";
     let is3dFilter = "all";
 
     const listDiv = document.getElementById("graph-list");
@@ -108,6 +115,7 @@
           <p>Interactive: ${graph.interactive ? checkMark : crossMark}</p>
           <p>Animation: ${graph.animation ? checkMark : crossMark}</p>
           <p>Fractal: ${graph.fractal ? checkMark : crossMark}</p>
+          <p>Video-inspired: ${graph.videoinspired ? checkMark : crossMark}</p>
           <p>3D: ${graph.is3d ? checkMark : crossMark}</p>
           <hr>
         `;
@@ -140,12 +148,17 @@
           (fractalFilter === checkMark && graph.fractal) ||
           (fractalFilter === crossMark && !graph.fractal);
 
+        const videoinspiredOk =
+          videoinspiredFilter === "all" ||
+          (videoinspiredFilter === checkMark && graph.videoinspired) ||
+          (videoinspiredFilter === crossMark && !graph.videoinspired);
+
         const is3dOk =
           is3dFilter === "all" ||
           (is3dFilter === checkMark && graph.is3d) ||
           (is3dFilter === crossMark && !graph.is3d);
 
-        return onelinerOk && interactiveOk && animationOk && fractalOk && is3dOk;
+        return onelinerOk && interactiveOk && animationOk && fractalOk && videoinspiredOk && is3dOk;
       });
 
       // Sort filtered data
@@ -175,6 +188,7 @@
         interactive: +d.interactive,
         animation: +d.animation,
         fractal: +d.fractal,
+        videoinspired: +d.videoinspired,
         is3d: +d.is3d,
         originalIndex: i
       }));
@@ -234,6 +248,18 @@
         sortAndRender(window.graphsData);
       });
 
+      // Video-inspired filter button toggle
+      document.getElementById("filter-videoinspired").addEventListener("click", () => {
+        if (videoinspiredFilter === "all") videoinspiredFilter = checkMark;
+        else if (videoinspiredFilter === checkMark) videoinspiredFilter = crossMark;
+        else videoinspiredFilter = "all";
+
+        const text = videoinspiredFilter === "all" ? "All" : videoinspiredFilter;
+        document.getElementById("filter-videoinspired").innerText = text;
+
+        sortAndRender(window.graphsData);
+      });
+
       // 3d filter button toggle
       document.getElementById("filter-is3d").addEventListener("click", () => {
         if (is3dFilter === "all") is3dFilter = checkMark;
@@ -274,20 +300,19 @@
     "graph": {
         "viewport": {
             "xmin": -1,
-            "ymin": -1,
+            "ymin": -3.4180001831054687,
             "xmax": 1,
-            "ymax": 1
+            "ymax": 3.4180001831054687
         },
         "xAxisNumbers": false,
         "yAxisNumbers": false,
         "polarNumbers": false,
         "userLockedViewport": true,
-        "squareAxes": false,
         "__v12ViewportLatexStash": {
             "xmin": "-1",
             "xmax": "1",
-            "ymin": "-1",
-            "ymax": "1"
+            "ymin": "-3.4180001831054687",
+            "ymax": "3.4180001831054687"
         }
     },
     "expressions": {
@@ -317,7 +342,7 @@
                 "id": "111",
                 "folderId": "105",
                 "color": "#c74440",
-                "latex": "c_{ountByType}=\\sum_{n=1}^{N}\\left[o_{neliner}\\left[n\\right],i_{nteractive}\\left[n\\right],a_{nimation}\\left[n\\right],f_{ractal}\\left[n\\right],i_{s3d}\\left[n\\right]\\right]"
+                "latex": "c_{ountByType}=\\sum_{n=1}^{N}\\left[o_{neliner}\\left[n\\right],i_{nteractive}\\left[n\\right],a_{nimation}\\left[n\\right],f_{ractal}\\left[n\\right],v_{ideoinspired}\\left[n\\right],i_{s3d}\\left[n\\right]\\right]"
             },
             {
                 "type": "expression",
@@ -378,7 +403,19 @@
             {
                 "type": "folder",
                 "id": "107",
-                "title": "Scatterplot"
+                "title": "Scatterplot",
+                "collapsed": true
+            },
+            {
+                "type": "expression",
+                "id": "108",
+                "folderId": "107",
+                "color": "#2d70b3",
+                "latex": "\\left(0.425,-0.125\\right)",
+                "showLabel": true,
+                "label": "Number of Graphs over Time",
+                "hidden": true,
+                "labelSize": "1.15"
             },
             {
                 "type": "expression",
@@ -388,16 +425,6 @@
                 "latex": "\\left(\\frac{d_{ate}-\\min\\left(d_{ate}\\right)}{\\max\\left(d_{ate}\\right)-\\min\\left(d_{ate}\\right)}\\cdot\\frac{N}{N+2}+\\frac{1}{N+2},\\frac{c_{ountToDate}}{\\max\\left(c_{ountToDate}\\right)}\\cdot\\frac{N}{N+1}-1\\right)",
                 "pointSize": "0.6\\left(\\log\\left(b_{ytes}\\right)\\right)^{2}",
                 "movablePointSize": "0.6\\left(\\log\\left(b_{ytes}\\right)\\right)^{2}"
-            },
-            {
-                "type": "expression",
-                "id": "108",
-                "folderId": "107",
-                "color": "#2d70b3",
-                "latex": "\\left(0.4,-0.15\\right)",
-                "showLabel": true,
-                "label": "Number of Graphs over Time",
-                "hidden": true
             },
             {
                 "type": "folder",
@@ -410,14 +437,14 @@
                 "id": "121",
                 "folderId": "109",
                 "color": "#388c46",
-                "latex": "X=\\left[\\frac{1}{16},\\frac{4}{16},\\frac{7}{16},\\frac{10}{16},\\frac{13}{16}\\right]"
+                "latex": "X=\\left[\\frac{1}{19},\\frac{4}{19}...\\frac{16}{19}\\right]"
             },
             {
                 "type": "expression",
                 "id": "117",
                 "folderId": "109",
                 "color": "#388c46",
-                "latex": "\\operatorname{polygon}\\left(\\left(X,\\frac{2}{16}\\right),\\left(X,\\frac{c_{ountByType}}{\\max\\left(c_{ountByType}\\right)}\\cdot\\frac{15}{16}\\right),\\left(X+\\frac{2}{16},\\frac{c_{ountByType}}{\\max\\left(c_{ountByType}\\right)}\\cdot\\frac{15}{16}\\right),\\left(X+\\frac{2}{16},\\frac{2}{16}\\right)\\right)",
+                "latex": "\\operatorname{polygon}\\left(\\left(X,\\frac{2}{19}\\right),\\left(X,\\frac{c_{ountByType}}{\\max\\left(c_{ountByType}\\right)}\\cdot\\frac{18}{19}\\right),\\left(X+\\frac{2}{19},\\frac{c_{ountByType}}{\\max\\left(c_{ountByType}\\right)}\\cdot\\frac{18}{19}\\right),\\left(X+\\frac{2}{19},\\frac{2}{19}\\right)\\right)",
                 "fillOpacity": "1",
                 "lineWidth": "0"
             },
@@ -426,7 +453,7 @@
                 "id": "131",
                 "folderId": "109",
                 "color": "#388c46",
-                "latex": "\\left(X+\\frac{1}{16},\\frac{c_{ountByType}}{\\max\\left(c_{ountByType}\\right)}\\cdot\\frac{15}{16}-\\frac{1}{16}\\right)",
+                "latex": "\\left(X+\\frac{1}{19},\\frac{c_{ountByType}}{\\max\\left(c_{ountByType}\\right)}\\cdot\\frac{18}{19}-\\frac{1}{19}\\right)",
                 "showLabel": true,
                 "label": "${c_{ountByType}}",
                 "hidden": true
@@ -436,10 +463,11 @@
                 "id": "93",
                 "folderId": "109",
                 "color": "#388c46",
-                "latex": "\\left(\\frac{2}{16},\\frac{1}{16}\\right)",
+                "latex": "\\left(\\frac{2}{19},\\frac{1}{19}\\right)",
                 "showLabel": true,
                 "label": "One-liner",
                 "hidden": true,
+                "labelSize": "0.8",
                 "labelAngle": "0.3"
             },
             {
@@ -447,10 +475,11 @@
                 "id": "130",
                 "folderId": "109",
                 "color": "#388c46",
-                "latex": "\\left(\\frac{5}{16},\\frac{1}{16}\\right)",
+                "latex": "\\left(\\frac{5}{19},\\frac{1}{19}\\right)",
                 "showLabel": true,
                 "label": "Interactive",
                 "hidden": true,
+                "labelSize": "0.8",
                 "labelAngle": "0.3"
             },
             {
@@ -458,10 +487,11 @@
                 "id": "129",
                 "folderId": "109",
                 "color": "#388c46",
-                "latex": "\\left(\\frac{8}{16},\\frac{1}{16}\\right)",
+                "latex": "\\left(\\frac{8}{19},\\frac{1}{19}\\right)",
                 "showLabel": true,
                 "label": "Animation",
                 "hidden": true,
+                "labelSize": "0.8",
                 "labelAngle": "0.3"
             },
             {
@@ -469,10 +499,23 @@
                 "id": "128",
                 "folderId": "109",
                 "color": "#388c46",
-                "latex": "\\left(\\frac{11}{16},\\frac{1}{16}\\right)",
+                "latex": "\\left(\\frac{11}{19},\\frac{1}{19}\\right)",
                 "showLabel": true,
                 "label": "Fractal",
                 "hidden": true,
+                "labelSize": "0.8",
+                "labelAngle": "0.3"
+            },
+            {
+                "type": "expression",
+                "id": "195",
+                "folderId": "109",
+                "color": "#388c46",
+                "latex": "\\left(\\frac{14}{19},\\frac{1}{19}\\right)",
+                "showLabel": true,
+                "label": "Video-inspired",
+                "hidden": true,
+                "labelSize": "0.8",
                 "labelAngle": "0.3"
             },
             {
@@ -480,10 +523,11 @@
                 "id": "127",
                 "folderId": "109",
                 "color": "#388c46",
-                "latex": "\\left(\\frac{14}{16},\\frac{1}{16}\\right)",
+                "latex": "\\left(\\frac{17}{19},\\frac{1}{19}\\right)",
                 "showLabel": true,
                 "label": "3D",
                 "hidden": true,
+                "labelSize": "0.8",
                 "labelAngle": "0.3"
             },
             {
@@ -497,10 +541,11 @@
                 "id": "91",
                 "folderId": "112",
                 "color": "#fa7e19",
-                "latex": "\\left(-0.5,-0.15\\right)",
+                "latex": "\\left(-0.5,-0.125\\right)",
                 "showLabel": true,
                 "label": "Number of Graphs by Year",
-                "hidden": true
+                "hidden": true,
+                "labelSize": "1.15"
             },
             {
                 "type": "expression",
@@ -563,7 +608,6 @@
                 "showLabel": true,
                 "label": "${y_{ears}}",
                 "hidden": true,
-                "points": false,
                 "labelSize": "0.8"
             }
         ]
@@ -605,7 +649,7 @@
       .then(text => {
         const { header, data } = parseCSV(text);
 
-        const exclude = ['title', 'link', 'date'];
+        const exclude = ['title', 'link', 'description', 'date'];
         const yCols = header.filter(h => !exclude.includes(h));
 
         // x-values from date
