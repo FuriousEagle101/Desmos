@@ -263,7 +263,6 @@
   <div id="calculator"></div>
 
   <script>
-    const CSV_URL = "https://raw.githubusercontent.com/FuriousEagle101/Desmos/refs/heads/main/Graph%20Data.csv";
     const elt = document.getElementById('calculator');
     const calculator = Desmos.GraphingCalculator(elt, { expressions: true, expressionsCollapsed: true});
 
@@ -598,7 +597,7 @@
       return year + (d - start) / (end - start);
     }
 
-    fetch(CSV_URL)
+    fetch("Graph%20Data.csv")
       .then(r => {
         if (!r.ok) throw new Error('Network response not ok: ' + r.status);
         return r.text();
