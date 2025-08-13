@@ -24,7 +24,7 @@
       margin-bottom: 20px;
     }
     img {
-      max-width: 300px;
+      max-width: 310px;
       height: auto;
       display: block;
     }
@@ -63,22 +63,22 @@
   <select id="sort-select">
     <option value="awesomeness">Awesomeness</option>
     <option value="title">Title (A-Z)</option>
-    <option value="date">Date Created (Newest)</option>
+    <option value="date">Date Created (New-Old)</option>
     <option value="bytes">Size (In Bytes)</option>
   </select>
 
   <br>Filter by: 
 
   <label>One-liner: </label>
-  <button id="filter-oneliner">All</button>
+  <button id="filter-oneliner">All</button> |
   <label>Interactive: </label>
-  <button id="filter-interactive">All</button>
+  <button id="filter-interactive">All</button> |
   <label>Animation: </label>
-  <button id="filter-animation">All</button>
+  <button id="filter-animation">All</button> |
   <label>Fractal: </label>
-  <button id="filter-fractal">All</button>
+  <button id="filter-fractal">All</button> |
   <label>Video-inspired: </label>
-  <button id="filter-videoinspired">All</button>
+  <button id="filter-videoinspired">All</button> |
   <label>3D: </label>
   <button id="filter-is3d">All</button>
 
@@ -107,17 +107,22 @@
         const div = document.createElement("div");
         div.className = "graph";
         div.innerHTML = `
-          <img src="Images/${graph.title}.png" alt="${graph.title}">
-          <p><strong><a href="${graph.link}" target="_blank">${graph.title}</a></strong></p>
-          <p>Date Created: ${graph.date}</p>
-          <p>Number of Bytes: ${graph.bytes}</p>
-          <p>One-liner: ${graph.oneliner ? checkMark : crossMark}</p>
-          <p>Interactive: ${graph.interactive ? checkMark : crossMark}</p>
-          <p>Animation: ${graph.animation ? checkMark : crossMark}</p>
-          <p>Fractal: ${graph.fractal ? checkMark : crossMark}</p>
-          <p>Video-inspired: ${graph.videoinspired ? checkMark : crossMark}</p>
-          <p>3D: ${graph.is3d ? checkMark : crossMark}</p>
-          <hr>
+          <hr><br>
+          <div style="display: flex; align-items: flex-start;">
+            <img src="Images/${graph.title}.png" alt="${graph.title}" style="margin-right: 20px;">
+            <div style="margin-top: -19px;">
+              <p><strong><a href="${graph.link}" target="_blank">${graph.title}</a></strong></p>
+              <p>Date Created: ${graph.date}</p>
+              <p>Number of Bytes: ${graph.bytes}</p>
+              <p>One-liner: ${graph.oneliner ? checkMark : crossMark}</p>
+              <p>Interactive: ${graph.interactive ? checkMark : crossMark}</p>
+              <p>Animation: ${graph.animation ? checkMark : crossMark}</p>
+              <p>Fractal: ${graph.fractal ? checkMark : crossMark}</p>
+              <p>Video-inspired: ${graph.videoinspired ? checkMark : crossMark}</p>
+              <p>3D: ${graph.is3d ? checkMark : crossMark}</p>
+            </div>
+          </div>
+          <p style="margin-top: 0px;">${graph.description}</p>
         `;
         listDiv.appendChild(div);
       });
@@ -190,6 +195,7 @@
         fractal: +d.fractal,
         videoinspired: +d.videoinspired,
         is3d: +d.is3d,
+        description: d.description,
         originalIndex: i
       }));
 
